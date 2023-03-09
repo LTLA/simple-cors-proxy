@@ -11,11 +11,13 @@ router.get("/:url", async ({ params, query }) => {
         resp = await fetch(decodeURIComponent(params.url));
     }
 
-    let options = { headers: { 'Access-Control-Allow-Origin': '*' } };
-    if (!resp.ok) {
-        options.status = resp.status;
-        options.headers["Content-Type"] = resp.headers.get("Content-Type");
-    } 
+    let headers = new Headers(resp.headers);
+    headers.set("Access-Control-Allow-Origin", "*");
+    let options = {
+        status: resp.status,
+        statusText: resp.statusText,
+        headers: headers
+    };
 
     return new Response(resp.body, options);
 })
