@@ -9,7 +9,12 @@ For example:
 
 ```js
 let base = "https://cors-proxy.aaron-lun.workers.dev";
-let target = "https://github.com/clusterfork/singlepp-references/releases/download/hs-latest/NovershternHematopoietic_matrix.csv.gz";
-let X = fetch(base + "/" + encodeURIComponent(target))
-```
+let target = "https://github.com/LTLA/singlepp-references/releases/download/hs-latest/NovershternHematopoietic_matrix.csv.gz";
+let full = base + "/" + encodeURIComponent(target);
 
+// Get the full file.
+let X = await fetch(full)
+
+// Range requests.
+let X2 = await fetch(base + "/" + encodeURIComponent(target) + "?start=100&end=200")
+```
